@@ -9,17 +9,16 @@
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body>
     <div class="wrapper">
       <header>
         <h1>Polar-plotter</h1>
-        <p>Arduino based polar plotter</p>
+        <p>This is the project documentation for a polar plotter based on the <a href="http://arduino.cc">Arduino</a> platform. See it in action on <a href="http://www.youtube.com/watch?v=SC3hTZtnDt4&feature=channel&list=UL">YouTube</a>.</p>
 
         <p class="view"><a href="https://github.com/roxen/polar-plotter">View the Project on GitHub <small>roxen/polar-plotter</small></a></p>
-
 
         <ul>
           <li><a href="https://github.com/roxen/polar-plotter/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -28,39 +27,170 @@
         </ul>
       </header>
       <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <h3>The project</h3>
+        <p>A polar plotter is a plotter with a rotating, extendable arm. Its characteristics differ greatly from those of a traditional plotter, which in most areas have a superior design. You could say the polar plotter is more portable or something, but mainly I made this one because it was more of a challenge.</p>
+        <p>Here's how it looks:</p>
+        <p><img src="images/image3.jpg" alt="" /></p>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+        <p>Here's a video showing off its plotting capabilities.</p>
+        <div class="video-container">
+          <iframe width="560" height="315" src="http://www.youtube.com/embed/SC3hTZtnDt4" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p></p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+	<h3>The code</h3>
+        <p>The code of this project is divided into two parts. One is the Arduino project that controls the plotter. The other is a java project used for generating font-data in a format readable by the Arduino program.</p>
+	<p>The Arduino project <code>plotter_polar</code> can be opened directly in the <a href="http://arduino.cc/en/Main/Software">Arduino IDE</a>.</p>
+	<p>The java project <code>font-path-generator</code> is a <a href="http://maven.apache.org">Maven project</a>. To compile and run, do
+          <pre><code>$ cd font-path-generator
+$ mvn install
+$ java -jar target/font-path-generator-1.0-SNAPSHOT.jar</code></pre>
+	</p>
+	<p>The program produces output of font data that can be copy/pasted into the Arduino program. See the javadoc for <code>FontPathGenerator</code> for more info.</p>
+	<p>You can also import and run the project in <a href="http://www.eclipse.org">Eclipse</a>.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+        <h3>The gear</h3>
+        <p>The brain of the plotter is an <a href="http://arduino.cc/en/Main/ArduinoBoardUno">Arduino UNO Rev3</a>.</p>
+        <p><img src="images/image15.jpg" alt="" /></p>
 
-<h3>Designer Templates</h3>
+        <p>The muscles come from two heavyweight stepper motors from <a href="http://www.allelectronics.com/make-a-store/item/SMT-119/4-LEAD-1.8-DEG-STEPPER-MOTOR/1.html">All Electronics.</a></p>
+        <p><img src="images/image10.jpg" alt="" /></p>
+        <p>These are quite quite heavy and powerful and come with a firmly mounted gear head. That's great when driving a gear rack</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+        <p><img src="images/image1.jpg" alt="" /></p>
+        <p>But not as great when you need to mount stuff to it. Here's how I did:</p>
+        <p><img src="images/image8.jpg" alt="" /></p>
 
-<h3>Rather Drive Stick?</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+        <p>The motors require quite a lot of power. This is provided by two <a href="http://www.schmalzhaus.com/BigEasyDriver/">Big Easy Driver</a>s.</p>
+        <p><img src="images/image11.jpg" alt="" /></p>
 
-<h3>Authors and Contributors</h3>
+        <p>The normal Easy Driver does not do the job for these motors. I tried.</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+        <p>The motors themselves have a resolution of 200 steps per revolution and the Big Easy Drivers provide 16 substeps per step, giving a total of 3200 steps per revolution. (That's pretty good resolution.)</p>
 
-<h3>Support or Contact</h3>
+        <p>The backbone of the plotter uses the awesome <a href="http://www.makerbeam.eu">Maker Beam</a>s.</p>
+        <p><img src="images/image9.jpg" alt="" /></p>
+        <p>I have used the starter kit, extra kits of 40mm and 60mm beams, two packs of bearings and the vinyl end caps.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+
+        <p>The construction has two adjustable feet to level the plotter so that the plotter head keeps on the same height from the paper at all lengths and directions.</p>
+        <p><img src="images/image7.jpg" alt="" /></p>
+
+        <p>The plotter arm (made up of two connected 300mm beams for stability) is guided by 9 bearings.</p>
+        <p><img src="images/image5.jpg" alt="" /></p>
+
+        <p>The pen is controlled by a RobotBase servo.</p>
+        <p><img src="images/image13.jpg" alt="" /></p>
+        <p>The servo head has a MakerBeam construction attached to it which holds the pen. The angles of this setup allows for almost vertical movement of the pen tip even though the movement is really rotating. The screws that hold the pen are easily loosened to provide simple pen switching.</p>
+        <p><img src="images/image4.jpg" alt="" /></p>
+        <p>The servo cable fits nicely in the space of the MakerBeam arm.</p>
+        <p><img src="images/image2.jpg" alt="" /></p>
+
+
+
+        <p>This <a href="http://www.seeedstudio.com/depot/rotary-encoder-with-switch-p-667.html">Rotary Encoder</a> allows for fine-tuning pen position in draw/hover mode. The encoder is endless and has steps when rotating it and can also be pushed down like a button. When not pushed down, rotation adjusts the up-mode of the pen with one degree. Pushed down, it adjusts the pen-down mode. Each step on the encoder maps to one degree on the servo.</p>
+        <p><img src="images/image12.jpg" alt="" /></p>
+
+
+        <p>This is the home grown control board for manual control of the arm. The two rightmost buttons control arm extension. The two in the middle control rotation. The leftmost triggers the plot program to run. All buttons are connected to ground. Inputs are pulled HIGH per default. See <a href="http://arduino.cc/en/Tutorial/DigitalPins">http://arduino.cc/en/Tutorial/DigitalPins</a> for details on setting a stable default state on inputs.</p>
+        <p><img src="images/image14.jpg" alt="" /></p>
+
+        <p>The Vinyl Gear rack comes from <a href="http://www.conrad.se">Conrad</a>. It is attached to the arm using double sided mounting tape.</p>
+
+
+        <h3>Wiring</h3>
+        <p>I haven't crated any schematics for the project. The wiring is quite simple though, and is pretty much all about knowing how to hook up your motors, which you'll need to know how to do anyway. Below is an overview image.<p>
+        <p><img src="images/image16.jpg" alt="" /></p>
+
+
+        <h3>Drawing</h3>
+        <p>On a traditional plotter, drawing lines and rectangles is simple. You can run the plotter in one direction for a while and then run it in another direction. On a polar plotter, drawing rectangles is trickier. And some lines are easy to draw and some not.</p>
+        <p>This line is easy to draw (you just run the radial (top) motor and let the angular (bottom) one stand still):</p>
+        <p><img src="images/lines.png" alt="" /></p>
+        <p>Whereas this one is quite tricky:</p>
+        <p><img src="images/lines2.png" alt="" /></p>
+        <p>For that one, while running the angular motor, the radius must first be decreased and then increased again.</p>
+
+        <p>The only two shapes that are possible to draw when running one motor at a time is a radial line or a circle segment. To be able to draw any shape, we need to divide them into small bits of these supported operations.</p>
+        <p>To start with, all shapes are converted to a number of short lines. These lines are then split into 1/8mm steps for each move. Then, for each step we translate this movent to its corresponding changes in the polar coordinate system, angle and radius. This is finally translated to the number of steps to run each motor.</p>
+        <p>The Arduino program implements sort of the <a href="http://en.wikipedia.org/wiki/Bresenham's_line_algorithm">Bresenham's line drawing algorithm</a>. In the implementation, each line segment is split into 1/8mm in the least steep direction. These small steps ensure smooth lines but also introduce significant rounding errors in each step. Therefore, as Bresenham declares, we must keep track of the rounding error we make and apply in the next calculation.</p>
+
+        <h3>Supported drawing methods</h3>
+        <p>The Arduino program supports a number of drawing methods. All choords are given in millimeters.</p>
+        <ul>
+          <li><code>moveTo(float x, float y)</code></li>
+          <li><code>lineTo(float x, float y)</code></li>
+          <li><code>drawRect(float x, float y, float width, float height)</code></li>
+          <li><code>drawCircle(float x, float y, float radius)</code></li>
+          <li><code>drawString(String str, float x, float y)</code></li>
+        </ul>
+        <p>Note that there is no optimization done to shorten the travel distances for the pen. Commercial plotters are quite efficient. This plotter for example starts drawing rectangles from the bottom left corner regardless of where the pen is when it is about to start.</p>
+
+
+        <h3>Drawing text</h3>
+        <p>I had kind of a hard time producing a useful font definition that could be used in Arduino. You cannot really bundle and read a TrueType font. Other stuff I looked at were SHX type (single line) fonts, but I never got that to work. What I wanted was a simple line representation o a simple font, but I didn't want to hand-write coordinates or anything like that.</p>
+        <p>I resorted to generating font definitions in java. In java, you can read a font, convert it to a shape and then get a path iterator for that shape. Each segment in the path iterator has a type and coords. The number of coords depends on the type. For e.g. LINE_TO, the coords make up one point and the operation means draw a line to this point from where we are. The types are defined in <a href="http://docs.oracle.com/javase/1.4.2/docs/api/java/awt/geom/PathIterator.html">http://docs.oracle.com/javase/1.4.2/docs/api/java/awt/geom/PathIterator.html</a>.</p>
+        <p>When getting a path iterator from a shape, you can say that it may contain Bezier curves or only lines. Getting only lines would have been awesome as this was already supported by the program, but that prove to be far more verbose than what would fit in the Arduino program. So I had to implement Bezier support. See the code for implementation details and <a href="http://en.wikipedia.org/wiki/Bézier_curve">Bezier curve</a> for background.</p>
+        <p>The font generator iterates over the segments and produces an int array representation that is printed to std out. This chunk can then be pasted into the Arduino program.</p>
+        <p>The following is the definition of the uppercase I:</p>
+        <pre><code>/* I */ int char_41[] PROGMEM = { 115, 15, 0, 37, 0, 1, 37, 289, 1, 78, 289, 1, 78, 0, 4};</code></pre>
+        <p>The first int <code>115</code> defines the width of the glyph. The second <code>15</code> means there are a total of 15 ints in this array. The third int <code>0</code> means <code>SEG_MOVETO</code> and <code>37, 0</code> is the point to move to. The following <code>1</code> means <code>SEG_LINETO</code> <code>37, 289</code> and so forth. The finishing <code>4</code> means <code>SEG_CLOSE</code> which means draw a line back to the latest <code>SEG_MOVETO</code> point.</p>
+
+        <p>The Arduino program has support for font size and line height. You set it globally before drawing text.</p>
+
+        <p>Note that when generating the font data, you can use any TrueType font which is awesome(!). Note though that complex fonts take lots of points and curves to describe to you may not fit the whole ASCII charset on the Arduino board.</p>
+        <p>An implementation detail is that Arduino program uses PROGMEM to store the font data and reads the definition of each char into memory before drawing it.</p>
+
+
+        <h3>Precision</h3>
+        <p>The plotter has quite good precision, at least when drawing close to origin. Both motors have 3200 steps mer revolution. This translates to 0.022mm radial movement per step and 2 * pi * 270mm / 3200steps = 0.53mm per step angular movement for a fully erected arm.</p>
+        <p>Note that, as can be seen in the video, the precision is pretty good also over time. I thought initially that rounding errors would cause it to drift, but apparently it does not.</p>
+
+
+        <h3>Speed</h3>
+        <p>The motors can go really fast. However, two factors limit the speed in which we can draw. Firstly, the time for calculations is significant. We do lots of math in each little step. This could probably be optimized, but currently it actually has impact. Secondly, drawing gets ugly in the corners of figures if we go too fast in the turns. The motors are powerful and the arm is quite light, but still if we go too fast in a corner there will be some jittering. We could probably go fast when drawing straight lines and slow down in the corners, but that's not implemented. Note though that the arm goes faster when the pen is up and we're not drawing.</p>
+        <p>Note also that the speed has more impact on drawing quality when the arm is fully erected.</p>
+
+        <h3>Other characteristics</h3>
+        <p>The plotter has no sensors and has no idea of the position of the arm when the program is started. This means that we need to define an origin and put the arm in that position manually before starting to draw. If the arm starts in a position other than what we've programmed it to, the drawing will be skewed.</p>
+        <p>The plotter also has no limits, meaning that if we draw too far away, the plotter will drop its arm. The same way, if we draw too close to origin, we'll probably bend the whole construction. The motors are quite powerful. Drawing outside the box should be done with a finger on the kill switch.</p>
+
+
+        <h3>Improvements</h3>
+        <p>There is plenty of room for improvements in both the hardware and software design. Here are some that I thought of:
+          <ul>
+            <li>Variable speed - run faster where it does not affect drawing quality (e.g. straight lines).</li>
+            <li>Spring suspended pen - to get a constant pen pressure and need less fine-tuning</li>
+            <li>Calculations - could probably be more efficient</li>
+            <li>The font definitions - having the array length in the array itself may not be the most efficient thing to do. But it saves some memory. If each int in the array could be a byte, that would be a great memory saver. We would have to transpose negative values though (font data below the baseline) and make sure we keep numbers within the byte boundary.</li>
+            <li>The upper motor attachment is unneccessarily complex. It was supposed to provide a bit of suspension which was definitely not needed since the arm rolls easily on the bearings.</li>
+          </ul>
+        </p>
+
       </section>
+
+
       <footer>
         <p>This project is maintained by <a href="https://github.com/roxen">roxen</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-35928201-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>    
   </body>
 </html>
