@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Polar-plotter by roxen</title>
+    <title>Polar Arduino Plotter by roxen</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Polar-plotter</h1>
+
+        <h1>Polar Arduino Plotter</h1>
         <p>This is the project documentation for a polar plotter based on the <a href="http://arduino.cc">Arduino</a> platform. See it in action on <a href="http://www.youtube.com/watch?v=SC3hTZtnDt4&feature=channel&list=UL">YouTube</a>.</p>
 
         <p class="view"><a href="https://github.com/roxen/polar-plotter">View the Project on GitHub <small>roxen/polar-plotter</small></a></p>
@@ -27,6 +28,7 @@
         </ul>
       </header>
       <section>
+
         <h3>The project</h3>
         <p>A polar plotter is a plotter with a rotating, extendable arm. Its characteristics differ greatly from those of a traditional plotter, which in most areas have a superior design. You could say the polar plotter is more portable or something, but mainly I made this one because it was more of a challenge.</p>
         <p>Here's how it looks:</p>
@@ -144,12 +146,14 @@ $ java -jar target/font-path-generator-1.0-SNAPSHOT.jar</code></pre>
 
 
         <h3>Precision</h3>
-        <p>The plotter has quite good precision, at least when drawing close to origin. Both motors have 3200 steps mer revolution. This translates to 0.022mm radial movement per step and 2 * pi * 270mm / 3200steps = 0.53mm per step angular movement for a fully erected arm.</p>
-        <p>Note that, as can be seen in the video, the precision is pretty good also over time. I thought initially that rounding errors would cause it to drift, but apparently it does not.</p>
+        <p>The plotter has quite good precision, at least when drawing close to origin. Both motors have 3200 steps per revolution. This translates to 0.022mm radial movement per step and 2 * pi * 270mm / 3200steps = 0.53mm per step angular movement for a fully erected arm.</p>
+        <p>Note that, as can be seen in the video, the accuracy is pretty good also over time. I thought initially that rounding errors would cause it to drift, but apparently they do not.</p>
 
 
         <h3>Speed</h3>
-        <p>The motors can go really fast. However, two factors limit the speed in which we can draw. Firstly, the time for calculations is significant. We do lots of math in each little step. This could probably be optimized, but currently it actually has impact. Secondly, drawing gets ugly in the corners of figures if we go too fast in the turns. The motors are powerful and the arm is quite light, but still if we go too fast in a corner there will be some jittering. We could probably go fast when drawing straight lines and slow down in the corners, but that's not implemented. Note though that the arm goes faster when the pen is up and we're not drawing.</p>
+        <p>The speed of the motors is controlled by a set delay in the stepping.</p>
+        <p>The motors can go really fast. However, the time for calculations is significant. We do lots of math in each little step. This could probably be optimized, but currently it actually has impact.</p>
+        <p>There is also the fact that drawing gets ugly in the corners of figures if we go too fast in the turns. The motors are powerful and the arm is quite light, but still if we go too fast in a corner there will be some jittering. We could probably go fast when drawing straight lines and slow down in the corners, but that's not implemented. Note though that the arm goes faster when the pen is up and we're not drawing.</p>
         <p>Note also that the speed has more impact on drawing quality when the arm is fully erected.</p>
 
         <h3>Other characteristics</h3>
@@ -167,6 +171,21 @@ $ java -jar target/font-path-generator-1.0-SNAPSHOT.jar</code></pre>
             <li>The upper motor attachment is unneccessarily complex. It was supposed to provide a bit of suspension which was definitely not needed since the arm rolls easily on the bearings.</li>
           </ul>
         </p>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'polarplotter'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
       </section>
 
